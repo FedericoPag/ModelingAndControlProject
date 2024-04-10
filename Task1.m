@@ -12,7 +12,7 @@ k = 2;
 lambda = 1/(100*tau);
 gamma = (lambda*ones(1,p))*tau;
 nu = 1e-2 * randn(q,1);
-debug = 0;
+debug = 1;
 
 % Definition of variables
 % S = unifrnd(1,2,k,1);
