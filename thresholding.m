@@ -7,7 +7,7 @@ function out = thresholding(x,gamma)
     
     for i= 1:length(x)
         gamma(i);
-       if x(i_in)>gamma(i)
+       if x(i)>gamma(i)
            out(i)= x(i) - gamma(i);
        
        elseif x(i) < -gamma(i)
