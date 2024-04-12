@@ -30,8 +30,8 @@ while 1
 end
 
 % Zerofying numbers under a threshold (tol)
-tol = 0.05;
-necessary = 0;
+tol = 4;
+necessary = 1;
 
 if necessary == 1
     for i=1:(p+q)

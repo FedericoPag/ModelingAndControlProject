@@ -14,7 +14,7 @@ gamma = (lambda*ones(1,p))*tau;
 nu = 1e-2 * randn(q,1);
 debug = 0;
 
-% Definition of variables
+%% Definition of variables
 % S = unifrnd(1,2,k,1);
 % x_tilde = [S; zeros(p-k , 1)];
 x_tilde= unif_funct(k,p);
@@ -33,9 +33,21 @@ while 1
     T = T + 1;
     if norm_difference_squared < delta
         break
-
     end
 end
+
+% Zerofying numbers under a threshold (tol)
+tol = 0.05;
+necessary = 0;
+
+if necessary == 1
+    for i=1:(p+q)
+       if abs(x_new(i)) < tol
+            x_new(i)=0;
+        end
+    end
+end
+
 
 %% Debug
 if debug == 1
