@@ -35,11 +35,13 @@ end
 
 
 %% Debug
-x_hat = z_hat(1:p);
-a_hat = z_hat(p+1:p+q);
+x_hat = Z_matrix(1:p, n_iter);
+a_hat = Z_matrix(p+1:p+q, n_iter);
 
 if debug == 1
     Z_matrix
+    x_hat'
+    a_hat'
 end
 
 plot_field(p, 10, 10, Z_matrix, n_iter);
