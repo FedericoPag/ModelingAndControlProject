@@ -13,6 +13,7 @@ lambda = 2/1000/tau;
 delta=1e-12;
 gamma = (lambda*ones(1,n))*tau;
 nu = 1e-2 * randn(q,1);
+debug=0;
 
 %% Definition variables
 x_tilde = randn(n,1);
