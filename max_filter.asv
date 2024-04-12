@@ -1,0 +1,13 @@
+function out = max_filter(in, times)
+    out = in;
+
+    for i=1:length(in)
+        count = 0;
+        for j=1:length(in)
+            
+        end
+        if ()
+    end
+
+
+end
