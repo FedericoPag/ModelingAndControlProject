@@ -7,7 +7,7 @@ p = 100;                % #cells
 q = 25;                 % #sensors
 eps = 1e-8;
 delta = 1e-12;
-debug = 1;
+debug = 0;
 
 load("localization.mat")
 
@@ -62,6 +62,6 @@ a_hat = z_hat(p+1:p+q);
 
 if debug == 1
     Z_matrix
-    x_hat';
-    a_hat';
 end
+
+plot_field(p, 10, 10, Z_matrix, n_iter);
