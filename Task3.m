@@ -50,3 +50,22 @@ end
 
 x = z_new(1:p);
 a = z_new(p+1:p+q);
+
+%% K-NN Algorithm
+
+k = 3;
+min = 9999999999;
+argmin = [-1, -1, -1]';
+for i=1:p
+    for j=1:p
+        for l=1:p
+            val = norm([D(:,i)+D(:,j)+D(:,l) eye(q)]-y)^2;
+            if val < min
+                min = val;
+                argmin = [i, l, j]'; 
+            end
+        end
+    end
+end
+
+
