@@ -44,7 +44,7 @@ load("tracking_moving_targets.mat");
 z_hat = zeros(p+q,1);
 n_iter = 50;
 
-Z_matrix = zeros(p+q, n_iter);
+Z_matrix = zeros(p, n_iter);
 
 for i=1:n_iter
     z_plus = thresholding(z_hat+tau*G'*(Y(:,i)-G*z_hat), Gamma);
@@ -53,6 +53,7 @@ for i=1:n_iter
         max_filter(A*z_plus(1:p),3); 
         max_filter(z_plus(p+1:p+q),2)
         ];
+    % Z_matrix(:,i) = [max_filter(A*z_plus(1:p),3)];
 end
 
 
@@ -60,8 +61,9 @@ end
 x_hat = z_hat(1:p);
 a_hat = z_hat(p+1:p+q);
 
-if debug == 1
-    Z_matrix
+if debug == 0
+    Z_matrix;
 end
 
-plot_field(p, 10, 10, Z_matrix, n_iter);
+
+plot_field(p, 10, 10, Z_matrix, n_iter)

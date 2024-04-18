@@ -1,5 +1,5 @@
 function plot_field(n, H, L, M, n_iter)
-    
+    load("localization.mat")
     W = H*L;
     room_grid = zeros(2,n);
 
@@ -9,17 +9,23 @@ function plot_field(n, H, L, M, n_iter)
 	    room_grid(2,i) = floor(W/2)+ floor((i-1)/L)*W;
     end
     
-    xtrue = zeros(n,1);
-    support = randperm(n);
-    support = support(1:3); % I consider 3 targets
-    xtrue(support) = 1;
-    target = find(xtrue);
+    xtrue1 = zeros(n,1);
+    support1 = randperm(n);
+    support1 = support1(1:3); % I consider 3 targets
+    xtrue1(support1) = 1;
+    target1 = find(xtrue1);
 
     for move = 1:n_iter
-        xtrue = M(1:n,move);
-        target = find(xtrue);
+        xtrue1 = A*xtrue1;
+        target1 = find(xtrue1)
     
-        plot(room_grid(1,target), room_grid(2,target),'s','MarkerSize',9, 'MarkerEdgeColor',1/255*[40 208 220],'MarkerFaceColor',1/255*[40 208 220])
+        plot(room_grid(1,target1), room_grid(2,target1),'s','MarkerSize',9, 'MarkerEdgeColor',[1 0 0],'MarkerFaceColor',[1 0 0])
+        hold on
+        grid on
+        xtrue = M(1:n,move);
+        target = find(xtrue)
+        
+        plot(room_grid(1,target), room_grid(2,target),'*','MarkerSize',9, 'MarkerEdgeColor',1/255*[40 208 220],'MarkerFaceColor',1/255*[40 208 220])
         grid on
         legend( 'Targets','Location','eastoutside')
        
