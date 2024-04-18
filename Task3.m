@@ -48,18 +48,22 @@ if debug == 1
     z_new
 end
 
-x = z_new(1:p);
-a = z_new(p+1:p+q);
+x = z_new(1:p);             % supp(x) = [23, 36, 87]
+a = z_new(p+1:p+q);         % supp(a) = [12, 16]
+
 
 %% K-NN Algorithm
+% We consider the system as attacks-free because k-NN requires to know
+% apriori how any attacks there are, but this is not realistic
 
 k = 3;
 min = 9999999999;
 argmin = [-1, -1, -1]';
+
 for i=1:p
     for j=1:p
         for l=1:p
-            val = norm([D(:,i)+D(:,j)+D(:,l) eye(q)]-y)^2;
+            val = norm(D(:,i) + D(:,j) + D(:,l) - y)^2;
             if val < min
                 min = val;
                 argmin = [i, l, j]'; 
@@ -68,4 +72,6 @@ for i=1:p
     end
 end
 
-
+% Note that instead of support equal to [23, 36, 87] just like ISTA, k-NN
+% algorithm has suppport [23, 46, 87]. This is because it consider the
+% state of sensor like they were attacks-free

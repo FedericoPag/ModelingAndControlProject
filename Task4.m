@@ -26,11 +26,16 @@ Z_matrix = zeros(p+q, n_iter);
 
 for i=1:n_iter
     z_plus = thresholding(z_hat+tau*G'*(Y(:,i)-G*z_hat), Gamma);
-    z_hat = [A*z_plus(1:p); z_plus(p+1:p+q)];
+    
+    % Create matrix with max-three values filter for graphical
+    % representation
     Z_matrix(:,i) = [
-        max_filter(A*z_plus(1:p),3); 
-        max_filter(z_plus(p+1:p+q),2)
+        max_filter(z_hat(1:p),3); 
+        max_filter(z_hat(p+1:p+q),2)
         ];
+
+    % Update of x_hat and a_hat
+    z_hat = [A*z_plus(1:p); z_plus(p+1:p+q)];
 end
 
 
@@ -44,4 +49,7 @@ if debug == 1
     a_hat'
 end
 
-plot_field(p, 10, 10, Z_matrix, n_iter);
+% Plot position matrix 
+plot_field(p, 10, 10, Z_matrix, n_iter, find(z_new(1:100,1)));
+
+% Note: it converges at time 24
