@@ -50,6 +50,6 @@ if debug == 1
 end
 
 % Plot position matrix 
-plot_field(p, 10, 10, Z_matrix, n_iter, find(z_new(1:100,1)));
+plot_field(p, q, 10, 10, Z_matrix, n_iter, find(z_new(1:100,1)));
 
 % Note: it converges at time 24
