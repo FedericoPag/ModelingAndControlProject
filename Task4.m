@@ -30,8 +30,8 @@ for i=1:n_iter
     % Create matrix with max-three values filter for graphical
     % representation
     Z_matrix(:,i) = [
-        max_filter(z_hat(1:p),3); 
-        max_filter(z_hat(p+1:p+q),2)
+        max_filter(z_hat(1:p),3,1); 
+        max_filter(z_hat(p+1:p+q),2,1)
         ];
 
     % Update of x_hat and a_hat

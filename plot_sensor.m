@@ -1,7 +1,7 @@
 function pos = plot_sensor(D, room_grid,q,occorrenze)
     S = D;
     for i = 1:q
-        S(i,:) = max_filter(D(i,:),1);
+        S(i,:) = max_filter(D(i,:),1,0);
         S(i,:);
         pos(i,1) = find(S(i,:));
         real_sensors = find(S(i,:));

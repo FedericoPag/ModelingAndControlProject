@@ -13,15 +13,14 @@ function plot_field(n,q, H, L, M, n_iter, init_cond)
     x_true(support) = 1;   
     
     for i = 1:25
-        S(i,:) = max_filter(D(i,:),1);
+        S(i,:) = max_filter(D(i,:),1,0);
         pos(i,1) = find(S(i,:));
     end
     for i = 1:25
         occorrenze(i,1) = sum(pos == pos(i));
     end
 
-    for move = 1:n_iter
-       
+    for move = 1:n_iter      
         sensor = M(n+1:n+q,move);
         our_sensor = find(sensor);
         
