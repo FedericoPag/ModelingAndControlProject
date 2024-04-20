@@ -21,10 +21,10 @@ Gamma = tau*[lambda(1)*ones(p,1); lambda(2)*ones(q,1)];
 tol = 0.002;
 
 %% DIST Algorithm
-% Q = Q_4;
+Q = Q_4;
 % Q = Q_8;
 % Q = Q_12;
-Q = Q_18;
+% Q = Q_18;
 z = zeros(p+q, q);
 z_new = z;
 T = 0;
@@ -63,6 +63,41 @@ if necessary == 1
         z_new(1:p,i) = max_filter(z_new(1:p,i),n_targets,1);
     end
 end
+
+%% Plot
+S = D;
+L = 10;
+H = 10;
+W = H*L;
+room_grid = zeros(2,p);
+for i=1:p
+    room_grid(1,i) = floor(W/2)+ mod(i-1,L)*W; 
+    room_grid(2,i) = floor(W/2)+ floor((i-1)/L)*W;
+end
+for i = 1:25
+        S(i,:) = max_filter(D(i,:),1,0);
+        pos(i,1) = find(S(i,:));
+    end
+for i = 1:25
+    occorrenze(i,1) = sum(pos == pos(i));
+end
+
+x_obtained = z_new(1:p,1);
+target = find(x_obtained);
+sensor = z_new(p+1:p+q,1);
+our_sensor = find(sensor);
+plot(room_grid(1,target), room_grid(2,target),'*','MarkerSize',9, 'MarkerEdgeColor',1/255*[40 208 220],'MarkerFaceColor',1/255*[40 208 220])
+hold on
+grid on
+plot(room_grid(1,pos(our_sensor)), room_grid(2,pos(our_sensor)),'d','MarkerSize',12, 'MarkerEdgeColor',[0 1 0])
+grid on
+pos = plot_sensor(D, room_grid,q,occorrenze);
+grid on
+legend('Targets','Attacks','Sensors','Location','eastoutside')
+xticks(100:100:1000)
+yticks(100:100:1000)
+axis([0 1000 0 1000])
+axis square
 
 
 %% Debug

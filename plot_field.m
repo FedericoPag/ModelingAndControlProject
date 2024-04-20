@@ -40,8 +40,6 @@ function plot_field(n,q, H, L, M, n_iter, init_cond)
         legend('Target', 'Estimation','Sensor estimation', 'Real Sensor','Location','eastoutside')       
         xticks(100:100:1000)
         yticks(100:100:1000)
-        xlabel('(cm)')
-        ylabel('(cm)')
         axis([0 1000 0 1000])
         axis square
         str = sprintf(' Time = %d', move);
