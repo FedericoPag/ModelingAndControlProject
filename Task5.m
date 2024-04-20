@@ -86,6 +86,7 @@ x_obtained = z_new(1:p,1);
 target = find(x_obtained);
 sensor = z_new(p+1:p+q,1);
 our_sensor = find(sensor);
+figure(1);
 plot(room_grid(1,target), room_grid(2,target),'*','MarkerSize',9, 'MarkerEdgeColor',1/255*[40 208 220],'MarkerFaceColor',1/255*[40 208 220])
 hold on
 grid on
@@ -98,6 +99,28 @@ xticks(100:100:1000)
 yticks(100:100:1000)
 axis([0 1000 0 1000])
 axis square
+
+figure(2);
+% Primo subplot
+subplot(2,2,1); % 2 righe, 2 colonne, primo subplot
+plot(digraph(Q_4));
+title('Q_4');
+
+% Secondo subplot
+subplot(2,2,2); % 2 righe, 2 colonne, secondo subplot
+plot(digraph(Q_4));
+title('Q_8');
+
+% Terzo subplot
+subplot(2,2,3); % 2 righe, 2 colonne, terzo subplot
+plot(digraph(Q_4));
+title('Q_{12}');
+
+% Quarto subplot
+subplot(2,2,4); % 2 righe, 2 colonne, quarto subplot
+plot(digraph(Q_4));
+title('Q_{18}');
+
 
 
 %% Debug
