@@ -17,14 +17,32 @@ G = [D eye(25)];
 tau = 4e-7;
 lambda = [10 0.1];
 Gamma = tau*[lambda(1)*ones(p,1); lambda(2)*ones(q,1)];
+Q = Q_4;
 
 tol = 0.002;
 
+% Substitute the value of flag with 4, 8, 12 or 18 to have the correct
+% graph definition. Default definition is Q_4 (and so if the choise of 
+% flag is not variable)
+graph_num = 4;
+
 %% DIST Algorithm
-Q = Q_4;
-% Q = Q_8;
-% Q = Q_12;
-% Q = Q_18;
+
+if graph_num == 4
+    Q = Q_4;
+elseif graph_num == 8
+    Q = Q_8;
+elseif graph_num == 12
+    Q = Q_12;
+elseif graph_num == 18
+    Q = Q_18;
+end
+
+eigs = sort(eig(Q),'descend', ComparisonMethod='abs');
+if (eigs(2) == 1)
+    disp("This system can reach the consensus")
+end
+
 z = zeros(p+q, q);
 z_new = z;
 T = 0;
@@ -103,22 +121,22 @@ axis square
 figure(2);
 % Primo subplot
 subplot(2,2,1); % 2 righe, 2 colonne, primo subplot
-plot(digraph(Q_4));
+plot(digraph(Q_4'));
 title('Q_4');
 
 % Secondo subplot
 subplot(2,2,2); % 2 righe, 2 colonne, secondo subplot
-plot(digraph(Q_4));
+plot(digraph(Q_8'));
 title('Q_8');
 
 % Terzo subplot
 subplot(2,2,3); % 2 righe, 2 colonne, terzo subplot
-plot(digraph(Q_4));
+plot(digraph(Q_12'));
 title('Q_{12}');
 
 % Quarto subplot
 subplot(2,2,4); % 2 righe, 2 colonne, quarto subplot
-plot(digraph(Q_4));
+plot(digraph(Q_18'));
 title('Q_{18}');
 
 

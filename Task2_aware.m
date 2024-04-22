@@ -20,7 +20,7 @@ x_tilde = randn(n,1);
 
 a = unif_funct(h,q);
 y = C*x_tilde + nu;
-y = aware_attack(h,q,y);
+y = aware_attack(h,q,y,0);
 
 x=zeros(n,1);
 
@@ -29,7 +29,7 @@ x=zeros(n,1);
 T = 0;
 
 while 1
-    x_new= thresholding(x + tau*C'*( y - C*x ) , gamma);
+    x_new = thresholding(x + tau*C'*( y - C*x ) , gamma);
     norm_difference_squared = norm(x_new - x);
     x = x_new;
     T = T + 1;
