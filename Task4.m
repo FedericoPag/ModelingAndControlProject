@@ -11,7 +11,7 @@ n_iter = 50;
 debug = 0;
 
 % Controls on aware attacks
-aware = 0;
+aware = 1;
 change_sensors = 0;
 
 % Loading data
@@ -26,8 +26,8 @@ Gamma = tau * [lambda(1)*ones(p, 1); lambda(2)*ones(q, 1)];
 
 
 %% Aware attack
-% ---In this part we define x_true with 3(n_targets) targets and 2 
-% (n_attacks) aware attacks on sensors
+% ---In this part we define x_true with 3 (n_targets) targets and 
+% 2 (n_attacks) aware attacks on sensors
 
 if aware
     n_targets = 3;
@@ -35,6 +35,7 @@ if aware
     noise = 1e-2*randn(q,1);
 
     x_true = unif_funct(n_targets,p);
+    init_cond = x_true;
     supp_a_true = randperm(q);
     supp_a_true = supp_a_true(1:n_attacks);
     
@@ -85,7 +86,9 @@ if debug == 1
     a_hat'
 end
 
-% Plot position matrix 
-plot_field(p, q, 10, 10, Z_matrix, n_iter, find(z_new(1:100,1)));
+% Plot position matrix
+if ~aware
+    plot_field(p, q, 10, 10, Z_matrix, n_iter, find(z_new(1:100,1)));
+end
 
 % Note: it converges at time 24

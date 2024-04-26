@@ -1,15 +1,14 @@
-clear all
-close all
-clc
-
 %% Hyperparameters
 q = 10;
 p = 20;
 C = randn(q, p);
+% load("Datatask1.mat");
 eps = 1e-8;
 tau = norm(C) ^(-2)- eps;
+
 k = 2;
 lambda = 1/(100*tau);
+% lambda = 0.1*rand(1); 
 gamma = (lambda*ones(1,p))*tau;
 nu = 1e-2 * randn(q,1);
 debug = 0;
@@ -38,10 +37,10 @@ end
 
 % Zerofying numbers under a threshold (tol)
 tol = 0.05;
-necessary = 0;
+necessary = 1;
 
 if necessary == 1
-    for i=1:(p+q)
+    for i=1:p
        if abs(x_new(i)) < tol
             x_new(i)=0;
         end
@@ -54,3 +53,4 @@ if debug == 1
     x_new'
     x_tilde'
 end
+
