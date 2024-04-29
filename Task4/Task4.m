@@ -11,7 +11,7 @@ n_iter = 50;
 debug = 0;
 
 % Controls on aware attacks
-aware = 1;
+aware = 0;
 change_sensors = 0;
 
 % Loading data
