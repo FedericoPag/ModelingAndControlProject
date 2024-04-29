@@ -1,0 +1,65 @@
+%% ----------------------------------------------
+%  Task 2: Secure estimation under sparse sensor attacks
+%  Creators: Federico Paglialunga - s328876
+%            Luigi Graziosi - s331564
+%            Marco Luppino - s333997
+%
+%  Last modification date:  29/04/2024
+% -----------------------------------------------
+%% This file is a wrapper for task 2 in the two situations of aware and 
+% unaware attacks to collect statisticks about what happens
+
+close all
+clc
+
+%% Unaware sparse attacks
+clear
+
+times = 20;
+cus = 0;                 % Correct Unaware (attacks) Support
+dist = 0;                % Distance
+
+for i=1:times
+    run("Task2_unaware.m");
+    if length(find(a)) == length(find(a_estimated))
+        if find(a) == find(a_estimated)
+            cus = cus + 1;
+        end
+    end
+
+    dist = dist + norm(x_tilde-x)^2;
+end
+
+unaware_rate = cus/times;
+mean_dist = dist/times;
+
+fprintf("The rate of correct attacks support is: %.2f\n", unaware_rate);
+% The rate of correct attacks support is: 0.90
+fprintf("The mean distance is: %.3f\n", mean_dist);
+% The mean distance is: 0.0227
+
+%% Aware sparse attacks
+clear
+
+times = 20;
+cas = 0;                 % Correct Aware (attacks) Support
+dist = 0;                % Distance
+
+for i=1:times
+    run("Task2_aware.m");
+    if length(find(a)) == length(find(a_estimated))
+        if find(a) == find(a_estimated)
+            cas = cas + 1;
+        end
+    end
+
+    dist = dist + norm(x_tilde-x)^2;
+end
+
+unaware_rate = cas/times;
+mean_dist = dist/times;
+
+fprintf("The rate of correct attacks support is: %.2f\n", unaware_rate);
+% The rate of correct attacks support is: 0.00
+fprintf("The mean distance is: %.3f\n", mean_dist);
+% The mean distance is: 2.639

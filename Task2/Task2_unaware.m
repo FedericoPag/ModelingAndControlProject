@@ -1,14 +1,10 @@
-close all
-clear all
-clc
-
 %% Hyperparameters
 q =20;
 n = 10;
 h = 2;
 C = randn(q, n);
 eps = 1e-8;
-tau = norm(C) ^(-2)- eps;
+tau = norm(C)^(-2) - eps;
 lambda = 2/1000/tau;
 nu = 1e-2 * randn(q,1);
 debug = 0;
@@ -17,33 +13,38 @@ debug = 0;
 x_tilde = randn(n,1);
 a = unif_funct(h,q);
 
-G = [C eye(q)];
+G = normalize([C eye(q)]);
 z_tilde = [x_tilde; a];
 
-y = G *z_tilde + nu;
+y = G*z_tilde + nu;
 z = zeros(n+q,1);
 delta=1e-12;
 
-Gamma = [zeros(n,1); ones(q,1)];
+Gamma = tau*[zeros(n,1); ones(q,1)];
 
 %% ISTA
 T = 0;      % Counter
 
 while 1
-    z_new= thresholding(z + tau*G'*( y - G*z ) , Gamma);
-    norm_difference_squared = norm(z_new - z);
+    z_new= thresholding(z + tau*G'*(y - G*z), Gamma);
+    norm_difference = norm(z_new - z)^2;
     z = z_new;
     T = T + 1;
-    if norm_difference_squared < delta
+    if norm_difference < delta
         break
     end
 end
 
 
-%% Observations
+%% Debug
+x = z_new(1:n);
+a_estimated = z_new(n+1:n+q);
+
 if debug == 1
-    z_tilde'
-    z_new'
+    x_tilde'
+    x'
+    a'
+    a_estimated'
 end
 
-diff = norm(z_tilde-z_new)^2;        %Estimation accurancy
+% diff = norm(z_tilde-z_new)^2;        %Estimation accurancy
