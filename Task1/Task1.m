@@ -27,10 +27,10 @@ T = 0;          % Counter
 
 while 1
     x_new= thresholding(x + tau*C'*( y - C*x ) , gamma);
-    norm_difference_squared = norm(x_new - x);
+    norm_difference = norm(x_new - x);
     x = x_new;
     T = T + 1;
-    if norm_difference_squared < delta
+    if norm_difference < delta
         break
     end
 end

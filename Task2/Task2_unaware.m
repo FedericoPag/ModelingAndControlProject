@@ -7,13 +7,13 @@ eps = 1e-8;
 tau = norm(C)^(-2) - eps;
 lambda = 2/1000/tau;
 nu = 1e-2 * randn(q,1);
-debug = 0;
+debug = 1;
 
 %% Definition of variables
 x_tilde = randn(n,1);
 a = unif_funct(h,q);
 
-G = normalize([C eye(q)]);
+G = [C eye(q)];
 z_tilde = [x_tilde; a];
 
 y = G*z_tilde + nu;
@@ -27,7 +27,7 @@ T = 0;      % Counter
 
 while 1
     z_new= thresholding(z + tau*G'*(y - G*z), Gamma);
-    norm_difference = norm(z_new - z)^2;
+    norm_difference = norm(z_new - z);
     z = z_new;
     T = T + 1;
     if norm_difference < delta

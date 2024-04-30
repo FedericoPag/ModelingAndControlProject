@@ -7,7 +7,7 @@ eps = 1e-8;
 tau = norm(C)^(-2) - eps;
 lambda = 2/1000/tau;
 delta=1e-12;
-gamma = lambda * ones(1,n+q) * tau;
+gamma = lambda * [zeros(n,1); ones(q,1)] * tau;
 nu = 1e-2 * randn(q,1);
 debug=0;
 
@@ -17,13 +17,16 @@ x_tilde = randn(n,1);
 a = unif_funct(h,q);
 supp_a = find(a);
 
-G = normalize([C eye(q)]);
-
 y = C*x_tilde + nu;
+
+a(supp_a) = 0.5*y(supp_a); 
 y = aware_attack(h,q,y,supp_a);
 
 z_tilde = [x_tilde; a];
 z=zeros(n+q,1);
+
+G = [C eye(q)];
+y = G*z_tilde;
 
 %% ISTA
 T = 0;

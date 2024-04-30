@@ -56,10 +56,10 @@ for i=1:times
     dist = dist + norm(x_tilde-x)^2;
 end
 
-unaware_rate = cas/times;
+aware_rate = cas/times;
 mean_dist = dist/times;
 
-fprintf("The rate of correct attacks support is: %.2f\n", unaware_rate);
+fprintf("The rate of correct attacks support is: %.2f\n", aware_rate);
 % The rate of correct attacks support is: 0.00
 fprintf("The mean distance is: %.3f\n", mean_dist);
 % The mean distance is: 2.639

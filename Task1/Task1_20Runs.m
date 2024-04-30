@@ -1,3 +1,11 @@
+%% ----------------------------------------------
+%  Task 1: Implementation of ISTA
+%  Creators: Federico Paglialunga - s328876
+%            Luigi Graziosi - s331564
+%            Marco Luppino - s333997
+%
+%  Last modification date:  26/04/2024
+% -----------------------------------------------
 %% This file has the function of extract statistics on 20 runs
 clear
 close all
