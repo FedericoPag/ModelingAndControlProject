@@ -1,7 +1,7 @@
 function plot_field(n,q, H, L, M, n_iter, init_cond)    
     W = H*L;
     room_grid = zeros(2,n);
-    load("localization.mat");
+    load("tracking_moving_targets.mat");
     S = D;
     for i=1:n
 	    room_grid(1,i) = floor(W/2)+ mod(i-1,L)*W; 

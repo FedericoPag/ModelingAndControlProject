@@ -11,12 +11,13 @@ n_iter = 50;
 debug = 0;
 
 % Controls on aware attacks
-aware = 0;
-change_sensors = 0;
+aware = 1;
+change_sensors = 1;
 
 % Loading data
 load("tracking_moving_targets.mat");
-load("z_new_task_3.mat");
+load("z_estim.mat");
+init_cond = z_estim(1:100);
 
 % Variables
 G = normalize([D eye(q)]);
@@ -33,17 +34,21 @@ if aware
     n_targets = 3;
     n_attacks = 2;
     noise = 1e-2*randn(q,1);
-
-    x_true = unif_funct(n_targets,p);
+    
+    supp_x_true = randperm(p);
+    supp_x_true = supp_x_true(1:n_targets);
+    x_true = zeros(p,1);
+    x_true(supp_x_true) = 1;
     init_cond = x_true;
+    x_true = A*x_true;
     supp_a_true = randperm(q);
     supp_a_true = supp_a_true(1:n_attacks);
     
-    Y_aware = zeros(size(Y));
+    Y = zeros(size(Y));
 
     for i=1:n_iter
-       Y_aware(:,i) = D*x_true+noise;
-       Y_aware(:,i) = aware_attack(2, q, Y_aware(:,1), supp_a_true);
+       Y(:,i) = D*x_true+noise;
+       Y(:,i) = aware_attack(2, q, Y(:,i), supp_a_true);
        x_true = A*x_true;
        if change_sensors && i==25
            supp_a_true = randperm(q);
@@ -55,15 +60,11 @@ end
 
 %% Sparse observer
 z_hat = zeros(p+q,1);
-
 Z_matrix = zeros(p+q, n_iter);
 
 for i=1:n_iter
-    if aware
-        z_plus = thresholding(z_hat+tau*G'*(Y_aware(:,i)-G*z_hat), Gamma);
-    else
-        z_plus = thresholding(z_hat+tau*G'*(Y(:,i)-G*z_hat), Gamma);
-    end
+    z_plus = thresholding(z_hat+tau*G'*(Y(:,i)-G*z_hat), Gamma);
+
     % Create matrix with max-three values filter for graphical
     % representation
     Z_matrix(:,i) = [
@@ -87,8 +88,7 @@ if debug == 1
 end
 
 % Plot position matrix
-if ~aware
-    plot_field(p, q, 10, 10, Z_matrix, n_iter, find(z_new(1:100,1)));
-end
+plot_field(p, q, 10, 10, Z_matrix, n_iter, find(init_cond));
+
 
 % Note: it converges at time 24
