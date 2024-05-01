@@ -3,11 +3,12 @@ q =20;
 n = 10;
 h = 2;
 C = randn(q, n);
-eps = 1e-8;
+eps = 1e-12;
 tau = norm(C)^(-2) - eps;
 lambda = 2/1000/tau;
 nu = 1e-2 * randn(q,1);
-debug = 1;
+delta = 1e-8;
+debug = 0;
 
 %% Definition of variables
 x_tilde = randn(n,1);
@@ -18,7 +19,6 @@ z_tilde = [x_tilde; a];
 
 y = G*z_tilde + nu;
 z = zeros(n+q,1);
-delta=1e-12;
 
 Gamma = tau*[zeros(n,1); ones(q,1)];
 
@@ -46,5 +46,3 @@ if debug == 1
     a'
     a_estimated'
 end
-
-% diff = norm(z_tilde-z_new)^2;        %Estimation accurancy

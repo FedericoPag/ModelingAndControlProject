@@ -13,10 +13,9 @@ debug=0;
 
 %% Definition variables
 x_tilde = randn(n,1);
+a = zeros(q,1);
 
-a = unif_funct(h,q);
-supp_a = find(a);
-
+supp_a = randperm(q,h);
 y = C*x_tilde + nu;
 
 a(supp_a) = 0.5*y(supp_a); 
