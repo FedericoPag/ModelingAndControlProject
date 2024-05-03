@@ -1,4 +1,13 @@
-clear all
+%% ----------------------------------------------
+%  Task 3: Tsarget localization under sparse sensor attacks
+%  Creators: Federico Paglialunga - s328876
+%            Luigi Graziosi - s331564
+%            Marco Luppino - s333997
+%
+%  Last modification date:  03/05/2024
+% -----------------------------------------------
+%% ----------------------------------------------
+clear
 close all
 clc
 

@@ -1,4 +1,13 @@
-clear all
+%% ----------------------------------------------
+%  Task 4: Sparse observer
+%  Creators: Federico Paglialunga - s328876
+%            Luigi Graziosi - s331564
+%            Marco Luppino - s333997
+%
+%  Last modification date:  03/05/2024
+% -----------------------------------------------
+%% ----------------------------------------------
+clear
 close all
 clc
 
@@ -7,7 +16,7 @@ p = 100;                % #cells
 q = 25;                 % #sensors
 eps = 1e-8;
 delta = 1e-12;
-n_iter = 50;
+n_iter = 100;
 debug = 0;
 
 % Controls on aware attacks
@@ -24,35 +33,32 @@ G = normalize([D eye(q)]);
 tau = norm(G)^(-2) - eps;
 lambda = [10 20];
 Gamma = tau * [lambda(1)*ones(p, 1); lambda(2)*ones(q, 1)];
-
+n_targets = 3;
+n_attacks = 2;
 
 %% Aware attack
 % ---In this part we define x_true with 3 (n_targets) targets and 
 % 2 (n_attacks) aware attacks on sensors
 
 if aware
-    n_targets = 3;
-    n_attacks = 2;
     noise = 1e-2*randn(q,1);
     
-    supp_x_true = randperm(p);
-    supp_x_true = supp_x_true(1:n_targets);
+    supp_x_true = randperm(p,n_targets);
     x_true = zeros(p,1);
     x_true(supp_x_true) = 1;
     init_cond = x_true;
-    x_true = A*x_true;
-    supp_a_true = randperm(q);
-    supp_a_true = supp_a_true(1:n_attacks);
+    x_true = A*x_true;                  % Strictly for plot reasons
+    supp_a_true = randperm(q,n_attacks);
     
     Y = zeros(size(Y));
+    % n = randperm(n_iter,1);
 
     for i=1:n_iter
        Y(:,i) = D*x_true+noise;
        Y(:,i) = aware_attack(2, q, Y(:,i), supp_a_true);
        x_true = A*x_true;
-       if change_sensors && i==25
-           supp_a_true = randperm(q);
-           supp_a_true = supp_a_true(1:n_attacks);
+       if change_sensors && i==n_iter/2
+           supp_a_true = randperm(q,n_attacks);
        end
     end
 end
@@ -68,8 +74,8 @@ for i=1:n_iter
     % Create matrix with max-three values filter for graphical
     % representation
     Z_matrix(:,i) = [
-        max_filter(z_hat(1:p),3,1); 
-        max_filter(z_hat(p+1:p+q),2,1)
+        max_filter(z_hat(1:p),n_targets,1); 
+        max_filter(z_hat(p+1:p+q),n_attacks,1)
         ];
 
     % Update of x_hat and a_hat

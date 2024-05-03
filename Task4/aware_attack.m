@@ -6,7 +6,7 @@ function res = aware_attack(k, p, y, sup)
     res = y;        %Initial condition
     
     if sup == 0
-        sup = randperm(p,k)     
+        sup = randperm(p,k);  
     end
 
     for i=1:length(sup)

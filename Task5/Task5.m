@@ -1,4 +1,13 @@
-clear all
+%% ----------------------------------------------
+%  Task 5: Distributed target localization under sparse sensor attacks
+%  Creators: Federico Paglialunga - s328876
+%            Luigi Graziosi - s331564
+%            Marco Luppino - s333997
+%
+%  Last modification date:  03/05/2024
+% -----------------------------------------------
+%% ----------------------------------------------
+clear
 close all
 clc
 
@@ -105,10 +114,10 @@ target = find(x_obtained);
 sensor = z_new(p+1:p+q,1);
 our_sensor = find(sensor);
 figure(1);
-plot(room_grid(1,target), room_grid(2,target),'*','MarkerSize',9, 'MarkerEdgeColor',1/255*[40 208 220],'MarkerFaceColor',1/255*[40 208 220])
+plot(room_grid(1,target), room_grid(2,target),'d','MarkerSize',12, 'MarkerEdgeColor',1/255*[40 208 220])
 hold on
 grid on
-plot(room_grid(1,pos(our_sensor)), room_grid(2,pos(our_sensor)),'d','MarkerSize',12, 'MarkerEdgeColor',[0 1 0])
+plot(room_grid(1,pos(our_sensor)), room_grid(2,pos(our_sensor)),'*','MarkerSize',12, 'MarkerEdgeColor',[0 1 0])
 grid on
 pos = plot_sensor(D, room_grid,q,occorrenze);
 grid on

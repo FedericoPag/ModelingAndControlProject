@@ -29,12 +29,12 @@ function plot_field(n,q, H, L, M, n_iter, init_cond)
 
         x_true = A*x_true;
         real_pos = find(x_true);
-        plot(room_grid(1,real_pos), room_grid(2,real_pos),'s','MarkerSize',9, 'MarkerEdgeColor',[1 0 0],'MarkerFaceColor',[1 0 0])
+        plot(room_grid(1,real_pos), room_grid(2,real_pos),'s','MarkerSize',11, 'MarkerEdgeColor',[1 0 0],'MarkerFaceColor',[1 0 0])
         grid on
         hold on
-        plot(room_grid(1,target), room_grid(2,target),'*','MarkerSize',9, 'MarkerEdgeColor',1/255*[40 208 220],'MarkerFaceColor',1/255*[40 208 220])
+        plot(room_grid(1,target), room_grid(2,target),'d','MarkerSize',14, 'MarkerEdgeColor',1/255*[40 208 220])
         grid on
-        plot(room_grid(1,pos(our_sensor)), room_grid(2,pos(our_sensor)),'d','MarkerSize',12, 'MarkerEdgeColor',[0 1 0])
+        plot(room_grid(1,pos(our_sensor)), room_grid(2,pos(our_sensor)),'*','MarkerSize',14, 'MarkerEdgeColor',[0 1 0])
         plot_sensor(D, room_grid,q,occorrenze);
         grid on 
         legend('Target', 'Estimation','Sensor estimation', 'Real Sensor','Location','eastoutside')       
