@@ -96,5 +96,4 @@ end
 % Plot position matrix
 plot_field(p, q, 10, 10, Z_matrix, n_iter, find(init_cond));
 
-
 % Note: it converges at time 24

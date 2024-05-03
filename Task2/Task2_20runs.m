@@ -34,9 +34,9 @@ unaware_rate = cus/times;
 mean_dist = dist/times;
 
 fprintf("\tUnaware\nThe rate of correct attacks support is: %.2f\n", unaware_rate);
-% The rate of correct attacks support is: 0.90
+% The rate of correct attacks support is: 0.85
 fprintf("The mean distance is: %.3f\n", mean_dist);
-% The mean distance is: 0.0227
+% The mean distance is: 0.029
 
 %% Aware sparse attacks
 clear
@@ -60,6 +60,6 @@ aware_rate = cas/times;
 mean_dist = dist/times;
 
 fprintf("\n\tAware\nThe rate of correct attacks support is: %.2f\n", aware_rate);
-% The rate of correct attacks support is: 0.00
+% The rate of correct attacks support is: 0.50
 fprintf("The mean distance is: %.3f\n", mean_dist);
-% The mean distance is: 2.639
+% The mean distance is: 0.065

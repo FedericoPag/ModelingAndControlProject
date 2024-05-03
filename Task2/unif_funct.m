@@ -12,7 +12,7 @@ function res = unif_funct(k, p)
     end
 
     % Randomly insert of k values in res vector
-    supp_a = randperm(p,k);
+    supp_a = sort(randperm(p,k));
     for i=1:k
         res(supp_a(i)) = list_of_values(i);
     end

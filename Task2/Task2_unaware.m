@@ -3,11 +3,11 @@ q =20;
 n = 10;
 h = 2;
 C = randn(q, n);
-eps = 1e-12;
+eps = 1e-8;
 tau = norm(C)^(-2) - eps;
 lambda = 2/1000/tau;
 nu = 1e-2 * randn(q,1);
-delta = 1e-8;
+delta = 1e-12;
 debug = 0;
 
 %% Definition of variables
@@ -20,7 +20,7 @@ z_tilde = [x_tilde; a];
 y = G*z_tilde + nu;
 z = zeros(n+q,1);
 
-Gamma = tau*[zeros(n,1); ones(q,1)];
+Gamma = lambda*tau*[zeros(n,1); ones(q,1)];
 
 %% ISTA
 T = 0;      % Counter
