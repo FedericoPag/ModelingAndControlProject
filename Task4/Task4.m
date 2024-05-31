@@ -17,11 +17,11 @@ p = 100;                % #cells
 q = 25;                 % #sensors
 eps = 1e-8;
 delta = 1e-12;
-n_iter = 100;
+n_iter = 50;
 debug = 0;
 
 % Controls on aware attacks
-aware = 1;
+aware = 0;
 change_sensors = 0;
 
 % Loading data

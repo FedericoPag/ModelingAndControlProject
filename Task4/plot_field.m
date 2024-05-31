@@ -37,7 +37,7 @@ function plot_field(n,q, H, L, M, n_iter, init_cond)
         plot(room_grid(1,pos(our_sensor)), room_grid(2,pos(our_sensor)),'*','MarkerSize',14, 'MarkerEdgeColor',[0 1 0])
         plot_sensor(D, room_grid,q,occorrenze);
         grid on 
-        legend('Target', 'Estimation','Sensor estimation', 'Real Sensor','Location','eastoutside')       
+        legend('Target', 'Target estimation','Attack estimation', 'Real sensor','Location','eastoutside')       
         xticks(100:100:1000)
         yticks(100:100:1000)
         axis([0 1000 0 1000])
