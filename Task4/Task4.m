@@ -4,12 +4,13 @@
 %            Luigi Graziosi - s331564
 %            Marco Luppino - s333997
 %
-%  Last modification date:  03/05/2024
+%  Last modification date:  31/05/2024
 % -----------------------------------------------
 %% ----------------------------------------------
 clear
 close all
 clc
+
 
 %% Hyperparameters
 p = 100;                % #cells
@@ -21,7 +22,7 @@ debug = 0;
 
 % Controls on aware attacks
 aware = 1;
-change_sensors = 1;
+change_sensors = 0;
 
 % Loading data
 load("tracking_moving_targets.mat");
@@ -34,7 +35,7 @@ tau = norm(G)^(-2) - eps;
 lambda = [10 20];
 Gamma = tau * [lambda(1)*ones(p, 1); lambda(2)*ones(q, 1)];
 n_targets = 3;
-n_attacks = 2;
+n_attacks = 15;
 
 %% Aware attack
 % ---In this part we define x_true with 3 (n_targets) targets and 
@@ -48,7 +49,7 @@ if aware
     x_true(supp_x_true) = 1;
     init_cond = x_true;
     x_true = A*x_true;                  % Strictly for plot reasons
-    supp_a_true = randperm(q,n_attacks);
+    supp_a_true = sort(randperm(q,n_attacks));
     
     Y = zeros(size(Y));
     % n = randperm(n_iter,1);
@@ -84,7 +85,7 @@ end
 
 
 %% Debug
-x_hat = Z_matrix(1:p, n_iter);
+x_hat = A*Z_matrix(1:p, n_iter);
 a_hat = Z_matrix(p+1:p+q, n_iter);
 
 if debug == 1
@@ -93,7 +94,8 @@ if debug == 1
     a_hat'
 end
 
+
 % Plot position matrix
-plot_field(p, q, 10, 10, Z_matrix, n_iter, find(init_cond));
+% plot_field(p, q, 10, 10, Z_matrix, n_iter, find(init_cond));
 
 % Note: it converges at time 24
