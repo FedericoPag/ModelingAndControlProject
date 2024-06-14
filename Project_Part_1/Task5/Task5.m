@@ -49,7 +49,7 @@ end
 
 eigs = sort(eig(Q),'descend', ComparisonMethod='abs');
 if (eigs(2) == 1)
-    disp("This system can reach the consensus")
+    disp("This system cannot reach the consensus")
 end
 
 z = zeros(p+q, q);
