@@ -4,7 +4,7 @@
 %            Luigi Graziosi - s331564
 %            Marco Luppino - s333997
 %
-%  Last modification date:  31/05/2024
+%  Last modification date:  16/06/2024
 % -----------------------------------------------
 %% ----------------------------------------------
 clear
@@ -21,8 +21,8 @@ n_iter = 50;
 debug = 0;
 
 % Controls on aware attacks
-aware = 0;
-change_sensors = 0;
+aware = 1;
+change_sensors = 1;
 
 % Loading data
 load("tracking_moving_targets.mat");
@@ -95,7 +95,7 @@ if debug == 1
 end
 
 
-% Plot position matrix
-% plot_field(p, q, 10, 10, Z_matrix, n_iter, find(init_cond));
+%% Plot position matrix
+plot_field(p, q, 10, 10, Z_matrix, n_iter, find(init_cond));
 
 % Note: it converges at time 24
