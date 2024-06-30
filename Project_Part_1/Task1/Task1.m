@@ -1,5 +1,8 @@
 %% Hyperparameters
-q = 10;
+
+if mod(runs,20) == 0
+    q = q+1;
+end
 p = 20;
 C = randn(q, p);
 % load("Datatask1.mat");
@@ -54,3 +57,4 @@ if debug == 1
     x_tilde'
 end
 
+runs = runs+1;

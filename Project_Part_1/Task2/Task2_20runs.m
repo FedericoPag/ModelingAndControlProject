@@ -4,7 +4,7 @@
 %            Luigi Graziosi - s331564
 %            Marco Luppino - s333997
 %
-%  Last modification date:  29/04/2024
+%  Last modification date:  29/06/2024
 % -----------------------------------------------
 %% This file is a wrapper for task 2 in the two situations of aware and 
 % unaware attacks to collect statisticks about what happens
@@ -18,6 +18,7 @@ clear
 times = 20;
 cus = 0;                 % Correct Unaware (attacks) Support
 dist = 0;                % Distance
+estim_rate = zeros(times,1);
 
 for i=1:times
     run("Task2_unaware.m");
@@ -26,7 +27,7 @@ for i=1:times
             cus = cus + 1;
         end
     end
-
+    
     dist = dist + norm(x_tilde-x)^2;
 end
 
@@ -39,11 +40,10 @@ fprintf("The mean distance is: %.3f\n", mean_dist);
 % The mean distance is: 0.029
 
 %% Aware sparse attacks
-clear
-
 times = 20;
 cas = 0;                 % Correct Aware (attacks) Support
 dist = 0;                % Distance
+estim_rate = zeros(times,1);
 
 for i=1:times
     run("Task2_aware.m");
@@ -63,3 +63,8 @@ fprintf("\n\tAware\nThe rate of correct attacks support is: %.2f\n", aware_rate)
 % The rate of correct attacks support is: 0.50
 fprintf("The mean distance is: %.3f\n", mean_dist);
 % The mean distance is: 0.065
+
+%% Plot
+figure(1)
+bar(["unaware" "aware"],100*[unaware_rate aware_rate]);
+grid on
