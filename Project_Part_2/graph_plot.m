@@ -18,14 +18,12 @@ for i = 1:nR
             s(si) = i;
             t(ti) = j;
             si = si+1;
-            ti = ti+1;
         end
     end
 end
 
 % Crea il grafo orientato
-G = digraph(s, t);
-
+G = digraph(Adj);
 numNodes = nR;
 
 % Crea le etichette dinamiche per i nodi partendo da 0
