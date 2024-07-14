@@ -40,4 +40,5 @@ h.MarkerSize = 4;
 labelnode(h, 1:numnodes(G), nodeLabels);
 h.NodeLabel = nodeLabels; % Assicurarsi che le etichette siano applicate
 h.NodeFontSize = 10;
+hold off
 end
